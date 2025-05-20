@@ -1,27 +1,25 @@
 package com.bear.models;
 
-import org.jetbrains.annotations.NotNull;
-
+import androidx.annotation.NonNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Category implements Serializable {
     private int id;
     private String name;
-    private int image_id;
     private ArrayList<Product> products;
 
     public Category() {
-        products=new ArrayList<>();
+        products = new ArrayList<>();
     }
 
-    public Category(int id, String name, int image_id) {
+    public Category(int id, String name) {
         this.id = id;
         this.name = name;
-        this.image_id = image_id;
-        products=new ArrayList<>();
+        products = new ArrayList<>();
     }
 
+    // Getter - Setter
     public int getId() {
         return id;
     }
@@ -38,14 +36,6 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public int getImage_id() {
-        return image_id;
-    }
-
-    public void setImage_id(int image_id) {
-        this.image_id = image_id;
-    }
-
     public ArrayList<Product> getProducts() {
         return products;
     }
@@ -54,12 +44,14 @@ public class Category implements Serializable {
         this.products = products;
     }
 
+    // Thêm sản phẩm vào danh sách sản phẩm
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    @NonNull
     @Override
     public String toString() {
-        return id+"\t"+name;
-    }
-    public void addProduct(Product p)
-    {
-        products.add(p);
+        return name;
     }
 }

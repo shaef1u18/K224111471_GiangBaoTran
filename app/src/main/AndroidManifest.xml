@@ -13,22 +13,22 @@
         android:theme="@style/Theme.K22411CSampleProject"
         tools:targetApi="31">
         <activity
+            android:name="com.bear.k22411csampleproject.CategoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bear.k22411csampleproject.CategoryManagementActivity"
+            android:exported="false" />
+        <activity
             android:name="com.bear.k22411csampleproject.CustomerManagementActivity"
             android:exported="false" />
         <activity
             android:name="com.bear.k22411csampleproject.ProductManagementActivity"
             android:exported="false" />
         <activity
-            android:name="com.bear.k22411csampleproject.CategoryManagementActivity"
-            android:exported="false" />
-        <activity
             android:name="com.bear.k22411csampleproject.EmployeeManagementActivity"
             android:exported="false" />
         <activity
             android:name="com.bear.k22411csampleproject.EmployeeHealthcareActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.k22411csampleproject.EmployeeManagementActivity"
             android:exported="false" />
         <activity
             android:name=".EmployeeManagementActivity"
@@ -42,6 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CategoryManagementActivity" />
         <activity
             android:name="com.bear.k22411csampleproject.MainActivity"
             android:exported="true" />

@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txtProduct;
     ImageView imgAdvancedProduct;
     TextView txtAdvancedProduct;
+    ImageView imgCategory;
+    TextView txtCategory;
 
 
     @Override
@@ -81,8 +83,26 @@ public class MainActivity extends AppCompatActivity {
                 openProductManagementActivity();
             }
         });
+        imgCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                openCategoryManagementActivity();
+            }
+        });
+        txtCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                openCategoryManagementActivity();
+            }
+        });
 
     }
+
+    private void openCategoryManagementActivity() {
+        Intent intent = new Intent(MainActivity.this, CategoryManagementActivity.class);
+        startActivity(intent);
+    }
+
     void openProductManagementActivity() {
         Intent intent=new Intent(MainActivity.this, ProductManagementActivity.class);
         startActivity(intent);
@@ -105,9 +125,11 @@ public class MainActivity extends AppCompatActivity {
         imgCustomer = findViewById(R.id.imgCustomer);
         txtCustomer = findViewById(R.id.txtCustomer);
         imgProduct = findViewById(R.id.imgProduct);
-        txtProduct = findViewById(R.id.txtCustomer);
+        txtProduct = findViewById(R.id.txtProduct);
         imgAdvancedProduct = findViewById(R.id.imgAdvancedProduct);
-        txtAdvancedProduct = findViewById(R.id.txtEmployee);
+        txtAdvancedProduct = findViewById(R.id.txtAdvancedProduct);
+        imgCategory = findViewById(R.id.imgCategory);
+        txtCategory = findViewById(R.id.txtCategory);
     }
 
     public void addEvents(View view) {

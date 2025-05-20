@@ -3,6 +3,7 @@ package com.bear.models;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class Product implements Serializable {
     private int id;
@@ -87,7 +88,6 @@ public class Product implements Serializable {
     public void setImage_id(int image_id) {
         this.image_id = image_id;
     }
-
 
     @NonNull
     @Override
