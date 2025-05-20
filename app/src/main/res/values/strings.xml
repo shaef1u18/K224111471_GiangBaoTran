@@ -27,4 +27,6 @@
     <string name="title_fat">Fat</string>
     <string name="title_leave">Leave</string>
     <string name="title_benefits">Benefits</string>
+    <string name="title_advanced_product">Advanced Product</string>
+    <string name="title_product">Product</string>
 </resources>

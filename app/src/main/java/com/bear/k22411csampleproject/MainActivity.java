@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     TextView txtEmployee;
     ImageView imgCustomer;
     TextView txtCustomer;
+    ImageView imgProduct;
+    TextView txtProduct;
+    ImageView imgAdvancedProduct;
+    TextView txtAdvancedProduct;
 
 
     @Override
@@ -51,10 +55,47 @@ public class MainActivity extends AppCompatActivity {
                 openEmployeeManagementActivity();
             }
         });
+
+        imgCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                openCustomerManagementActivity();
+            }
+        });
+        txtCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Gọi code mở màn hình quản trị nhân sự
+                openCustomerManagementActivity();
+            }
+        });
+        imgProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                openProductManagementActivity();
+            }
+        });
+        txtProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                openProductManagementActivity();
+            }
+        });
+
+    }
+    void openProductManagementActivity() {
+        Intent intent=new Intent(MainActivity.this, ProductManagementActivity.class);
+        startActivity(intent);
     }
     void openEmployeeManagementActivity()
     {
         Intent intent=new Intent(MainActivity.this, EmployeeManagementActivity.class);
+        startActivity(intent);
+    }
+
+    void openCustomerManagementActivity()
+    {
+        Intent intent=new Intent(MainActivity.this, CustomerManagementActivity.class);
         startActivity(intent);
     }
 
@@ -63,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
         txtEmployee = findViewById(R.id.txtEmployee);
         imgCustomer = findViewById(R.id.imgCustomer);
         txtCustomer = findViewById(R.id.txtCustomer);
+        imgProduct = findViewById(R.id.imgProduct);
+        txtProduct = findViewById(R.id.txtCustomer);
+        imgAdvancedProduct = findViewById(R.id.imgAdvancedProduct);
+        txtAdvancedProduct = findViewById(R.id.txtEmployee);
     }
 
     public void addEvents(View view) {
