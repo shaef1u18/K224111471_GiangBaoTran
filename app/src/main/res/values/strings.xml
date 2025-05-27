@@ -30,4 +30,16 @@
     <string name="title_advanced_product">Advanced Product</string>
     <string name="title_product">Product</string>
     <string name="title_category">Category</string>
+    <string name="title_new_customer">New Customer</string>
+    <string name="title_broadcast_advertising">Broadcast Advertising</string>
+    <string name="title_help">Help</string>
+    <string name="title_customer_detail">Customer Details</string>
+    <string name="title_customer_id">Customer ID:</string>
+    <string name="title_customer_name">Customer name:</string>
+    <string name="title_customer_email">Customer email:</string>
+    <string name="title_customer_phone">Customer phone:</string>
+    <string name="title_new_button" />
+    <string name="title_button_new">New</string>
+    <string name="title_button_save">Save</string>
+    <string name="title_button_remove">Remove</string>
 </resources>

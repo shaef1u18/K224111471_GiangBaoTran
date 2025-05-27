@@ -32,6 +32,11 @@ public class Product implements Serializable {
         this.price = price;
         this.image_id = image_id;
     }
+    @NonNull
+    @Override
+    public String toString() {
+        return id+"\t"+name+"\t"+price;
+    }
 
     public int getId() {
         return id;
@@ -87,11 +92,5 @@ public class Product implements Serializable {
 
     public void setImage_id(int image_id) {
         this.image_id = image_id;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return id+"\t"+name+"\t"+price;
     }
 }

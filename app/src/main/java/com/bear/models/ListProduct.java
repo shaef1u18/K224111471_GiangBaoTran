@@ -1,40 +1,33 @@
 package com.bear.models;
 
-import java.io.Serializable;
+import com.example.k22411csampleproject.R;
+
 import java.util.ArrayList;
-import java.util.Random;
 
-public class ListProduct implements Serializable {
-    private ArrayList<Product> products;
-
-    public ListProduct() {
-        products = new ArrayList<>();
+public class ListProduct {
+    ArrayList<Product> products;
+    public ListProduct()
+    {
+        products=new ArrayList<>();
     }
-
     public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setProducts(ArrayList<Product> products){
+        this.products=products;
     }
-
-    public void addProduct(Product p) {
-        products.add(p);
-    }
-
-    public void generate_sample_dataset() {
-        Random random = new Random();
-        for (int i = 1; i <= 100; i++) {
-            int id = i;
-            String name = "Product " + i;
-            int quantity = random.nextInt(100) + 1; // Random quantity between 1 and 100
-            double price = random.nextDouble() * 1000; // Random price between 0 and 1000
-            int categoryId = random.nextInt(5) + 1; // Random categoryId between 1 and 5
-            String description = "Description of Product " + i;
-
-            Product p = new Product(id, name, quantity, price, categoryId);
-            addProduct(p);
-        }
+    public void generate_sample_product_dataset()
+    {
+        Product p1 = new Product(1, "Coca Cola", 100, 10.0, R.mipmap.coca);
+        Product p2 = new Product(2, "Pepsi", 120, 9.5, R.mipmap.pepsi);
+        Product p3 = new Product(3, "7Up", 90, 8.0, R.mipmap.sevenup);
+        Product p4 = new Product(4, "Fanta", 85, 8.5, R.mipmap.fanta);
+        Product p5 = new Product(5, "Sprite", 95, 9.0, R.mipmap.sprite);
+        products.add(p1);
+        products.add(p2);
+        products.add(p3);
+        products.add(p4);
+        products.add(p5);
     }
 }
