@@ -20,7 +20,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bear.connectors.CustomerConnector;
+import com.bear.connectors.SQLiteConnector;
 import com.bear.models.Customer;
+import com.bear.models.ListCustomer;
 import com.example.k22411csampleproject.R;
 
 public class CustomerManagementActivity extends AppCompatActivity {
@@ -75,7 +77,8 @@ public class CustomerManagementActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1
         );
         connector=new CustomerConnector();
-        adapter.addAll(connector.get_all_customers());
+        ListCustomer lc=connector.getAllCustomers(new SQLiteConnector(this).openDatabase());
+        adapter.addAll(lc.getCustomers());
         lvCustomer.setAdapter(adapter);
     }
 

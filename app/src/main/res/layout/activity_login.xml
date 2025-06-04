@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/title_login_password_hint"
-        android:inputType="text" />
+        android:inputType="textPassword" />
 
         <CheckBox
         android:id="@+id/chkSaveLoginInfor"

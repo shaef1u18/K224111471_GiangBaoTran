@@ -42,4 +42,6 @@
     <string name="title_button_new">New</string>
     <string name="title_button_save">Save</string>
     <string name="title_button_remove">Remove</string>
+    <string name="title_payment_method">Payment Method</string>
+    <string name="title_order">Order</string>
 </resources>
