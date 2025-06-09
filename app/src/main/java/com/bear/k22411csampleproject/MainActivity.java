@@ -2,7 +2,6 @@ package com.bear.k22411csampleproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.k22411csampleproject.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imgAdvancedProduct;
     TextView txtAdvancedProduct;
+
     ImageView imgPaymentMethod;
     TextView txtPaymentMethod;
+
     ImageView imgOrder;
     TextView txtOrder;
 
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         addViews();
         addEvents();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,110 +49,72 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
-        imgEmployee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //gọi code mở màn hình quản trị nhân sự
-                openEmployeeManagementActivity();
-            }
-        });
-        txtEmployee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //gọi code mở màn hình quản trị nhân sự
-                openEmployeeManagementActivity();
-            }
-        });
+        imgEmployee.setOnClickListener(view -> openEmployeeManagementActivity());
+        txtEmployee.setOnClickListener(view -> openEmployeeManagementActivity());
 
-        imgCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCustomerManagementActivity();
-            }
-        });
-        txtCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCustomerManagementActivity();
-            }
-        });
+        imgCustomer.setOnClickListener(view -> openCustomerManagementActivity());
+        txtCustomer.setOnClickListener(view -> openCustomerManagementActivity());
 
-        imgProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProductManagementActivity();
-            }
-        });
-        txtProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openProductManagementActivity();
-            }
-        });
-        imgAdvancedProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openAdvancedProductManagementActivity();
-            }
-        });
-        txtAdvancedProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openAdvancedProductManagementActivity();
-            }
-        });
-        imgPaymentMethod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPaymentMethodActivity();
-            }
-            });
-        txtPaymentMethod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPaymentMethodActivity();
-            }
-        });
+        imgProduct.setOnClickListener(view -> openProductManagementActivity());
+        txtProduct.setOnClickListener(view -> openProductManagementActivity());
+
+        imgAdvancedProduct.setOnClickListener(view -> openAdvancedProductManagementActivity());
+        txtAdvancedProduct.setOnClickListener(view -> openAdvancedProductManagementActivity());
+
+        imgPaymentMethod.setOnClickListener(view -> openPaymentMethodActivity());
+        txtPaymentMethod.setOnClickListener(view -> openPaymentMethodActivity());
+
+        imgOrder.setOnClickListener(view -> openOrdersViewerActivity());
+        txtOrder.setOnClickListener(view -> openOrdersViewerActivity());
     }
 
     private void openPaymentMethodActivity() {
-        Intent intent=new Intent(MainActivity.this, PaymentMethodActivity.class);
+        Intent intent = new Intent(MainActivity.this, PaymentMethodActivity.class);
         startActivity(intent);
     }
 
     private void openAdvancedProductManagementActivity() {
-        Intent intent=new Intent(MainActivity.this, AdvancedProductManagementActivity.class);
+        Intent intent = new Intent(MainActivity.this, AdvancedProductManagementActivity.class);
         startActivity(intent);
     }
 
     private void openProductManagementActivity() {
-        Intent intent=new Intent(MainActivity.this, ProductManagementActivity.class);
+        Intent intent = new Intent(MainActivity.this, ProductManagementActivity.class);
         startActivity(intent);
     }
 
-    void openEmployeeManagementActivity()
-    {
-        Intent intent=new Intent(MainActivity.this, EmployeeManagementActivity.class);
+    private void openEmployeeManagementActivity() {
+        Intent intent = new Intent(MainActivity.this, EmployeeManagementActivity.class);
         startActivity(intent);
     }
-    void openCustomerManagementActivity()
-    {
-        Intent intent=new Intent(MainActivity.this, CustomerManagementActivity.class);
+
+    private void openCustomerManagementActivity() {
+        Intent intent = new Intent(MainActivity.this, CustomerManagementActivity.class);
+        startActivity(intent);
+    }
+
+    private void openOrdersViewerActivity() {
+        Intent intent = new Intent(MainActivity.this, OrdersViewerActivity.class);
         startActivity(intent);
     }
 
     private void addViews() {
-        imgEmployee=findViewById(R.id.imgEmployee);
-        txtEmployee=findViewById(R.id.txtEmployee);
-        imgCustomer=findViewById(R.id.imgCustomer);
-        txtCustomer=findViewById(R.id.txtCustomer);
-        imgProduct=findViewById(R.id.imgProduct);
-        txtProduct=findViewById(R.id.txtProduct);
-        imgAdvancedProduct=findViewById(R.id.imgOrder);
-        txtAdvancedProduct=findViewById(R.id.txtOrder);
-        imgPaymentMethod=findViewById(R.id.imgPaymentMethod);
-        imgOrder=findViewById(R.id.imgOrder);
-        txtPaymentMethod=findViewById(R.id.txtPaymentMethod);
-        txtOrder=findViewById(R.id.txtOrder);
+        imgEmployee = findViewById(R.id.imgEmployee);
+        txtEmployee = findViewById(R.id.txtEmployee);
+
+        imgCustomer = findViewById(R.id.imgCustomer);
+        txtCustomer = findViewById(R.id.txtCustomer);
+
+        imgProduct = findViewById(R.id.imgProduct);
+        txtProduct = findViewById(R.id.txtProduct);
+
+        imgAdvancedProduct = findViewById(R.id.imgAdvancedProduct);
+        txtAdvancedProduct = findViewById(R.id.txtAdvancedProduct);
+
+        imgPaymentMethod = findViewById(R.id.imgPaymentMethod);
+        txtPaymentMethod = findViewById(R.id.txtPaymentMethod);
+
+        imgOrder = findViewById(R.id.imgOrder);
+        txtOrder = findViewById(R.id.txtOrder);
     }
 }

@@ -59,8 +59,8 @@ public class CustomerConnector {
     public ListCustomer getAllCustomers(SQLiteDatabase database)
     {
         listCustomer = new ListCustomer();
-        Cursor cursor = database.rawQuery("SELECT * FROM Customer ",null);
-        while(cursor.moveToNext()){
+        Cursor cursor = database.rawQuery("SELECT * FROM Customer ", null);
+        while (cursor.moveToNext()) {
             int ID = cursor.getInt(0);
             String Name = cursor.getString(1);
             String Email = cursor.getString(2);
