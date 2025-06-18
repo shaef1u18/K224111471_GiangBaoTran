@@ -1,6 +1,8 @@
 package com.bear.k22411csampleproject;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,7 +69,8 @@ public class CustomerManagementActivity extends AppCompatActivity {
     private void displayCustomerDetailActivity(Customer c) {
         Intent intent=new Intent(CustomerManagementActivity.this,CustomerDetailActivity.class);
         intent.putExtra("SELECTED_CUSTOMER",c);
-        startActivity(intent);
+//        startActivity(intent);
+        startActivityForResult(intent,400); //300 là thêm mới; 400 là xem và sửa dữ liệu
     }
 
     private void addViews() {
@@ -121,29 +124,69 @@ public class CustomerManagementActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //trường hợp xử lý cho NEW CUSTOMER ta chỉ quân tâm 300 và 500 do ta định nghĩa:
-        if (requestCode==300 && resultCode==500)
+        if (requestCode==300 && resultCode==500) //thêm mới <- mã
         {
             //lấy gói tin ra:
             Customer c= (Customer) data.getSerializableExtra("NEW_CUSTOMER");
             process_save_customer(c);
         }
-    }
-
-    private void process_save_customer(Customer c) {
-        boolean result=connector.isExist(c);
-        if(result==true)
+        else if(requestCode==400 && resultCode==500)//cập nhật dữ liệu cho customer
+            {
+                Customer c= (Customer) data.getSerializableExtra("NEW_CUSTOMER");
+                process_save_update_customer(c);
+            }
+        else if(requestCode==400 && resultCode==600)
         {
-            //tức là customer này đã tồn tại trong hệ thống
-            //họ có nhu cầu sửa các thông tin khác, ví dụ:
-            //ĐỊA CHỈ, PAYMENT METHOD...
-            //Sinh viên tự xử lý trường hợp sửa thông tin
+            String id=data.getStringExtra("CUSTOMER_TO_REMOVE");
+            process_remove_customer(id);
+            //gọi customer connector sau nha
         }
-        else
-        {
-            //là thêm mới Customer vì chưa tồn tại:
-            connector.addCustomer(c);
+    }
+    private void process_save_customer(Customer c){
+        SQLiteConnector connector = new SQLiteConnector(this);
+        SQLiteDatabase database = connector.openDatabase();
+        CustomerConnector cc = new CustomerConnector();
+        long flag = cc.saveNewCustomer(c, database);
+        if (flag > 0) {
             adapter.clear();
-            adapter.addAll(connector.get_all_customers());
+            adapter.addAll(cc.getAllCustomers(database).getCustomers());
         }
     }
-}
+    private void process_save_update_customer(Customer c) {
+        SQLiteConnector connector=new SQLiteConnector(this);
+        SQLiteDatabase database=connector.openDatabase();
+        CustomerConnector cc=new CustomerConnector();
+        long flag=cc.saveUpdateCustomer(c, database);
+        Toast.makeText(CustomerManagementActivity.this,"FLAG="+flag,Toast.LENGTH_LONG).show();
+        if (flag>0) {
+            adapter.clear();
+            adapter.addAll(cc.getAllCustomers(database).getCustomers());
+        }
+    }
+    private void process_remove_customer(String id) {
+        SQLiteConnector connector = new SQLiteConnector(this);
+        SQLiteDatabase database = connector.openDatabase();
+        CustomerConnector cc = new CustomerConnector();
+        long flag = cc.removeCustomer(id, database);
+        Toast.makeText(CustomerManagementActivity.this, "FLAG=" + flag, Toast.LENGTH_SHORT).show();
+        if (flag > 0) {
+            adapter.clear();
+            adapter.addAll(cc.getAllCustomers(database).getCustomers());
+        }
+    }
+//        boolean result=connector.isExist(c);
+//        if(result==true)
+//        {
+//            //tức là customer này đã tồn tại trong hệ thống
+//            //họ có nhu cầu sửa các thông tin khác, ví dụ:
+//            //ĐỊA CHỈ, PAYMENT METHOD...
+//            //Sinh viên tự xử lý trường hợp sửa thông tin
+//        }
+//        else
+//        {
+//            //là thêm mới Customer vì chưa tồn tại:
+//            connector.addCustomer(c);
+//            adapter.clear();
+//            adapter.addAll(connector.get_all_customers());
+//        }
+    }

@@ -39,6 +39,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         });
         addViews();
         addEvents();
+        display_infor();
     }
 
     private void addEvents() {
@@ -48,6 +49,21 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 process_save_customer();
             }
         });
+        btn_remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //lấy intent từ màn hình gọi nó:
+                process_remove_customer();
+            }
+        });
+    }
+
+    private void process_remove_customer() {
+        Intent intent=getIntent();
+        String id=edt_customer_id.getText().toString();
+        intent.putExtra("CUSTOMER_TO_REMOVE",id);
+        setResult(600,intent);
+        finish();
     }
 
     private void process_save_customer() {
@@ -88,7 +104,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         //lấy intent từ bên customermanagementactivity gửi qua:
         Intent intent=getIntent();
         //lấy dữ liệu selected customer từ intent:
-        Customer c= (Customer) intent.getSerializableExtra("customer");
+        Customer c = (Customer) intent.getSerializableExtra("SELECTED_CUSTOMER");
         if(c==null)
             return;
         //hiển thị thông tin customer lên giao diện:
@@ -98,6 +114,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
         edt_customer_phone.setText(c.getPhone());
         edt_customer_username.setText(c.getUsername());
         edt_customer_password.setText(c.getPassword());
-        display_infor();
+       // display_infor();
     }
 }

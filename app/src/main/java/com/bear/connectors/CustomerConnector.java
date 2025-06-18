@@ -1,5 +1,6 @@
 package com.bear.connectors;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -78,11 +79,33 @@ public class CustomerConnector {
             //To do something ….
         }
         cursor.close();
-
-
-
-
-
         return listCustomer;
+    }
+    public long saveNewCustomer(Customer c, SQLiteDatabase database)
+    {
+        ContentValues values=new ContentValues();
+        values.put("Name",c.getName());
+        values.put("Email",c.getEmail());
+        values.put("Phone",c.getPhone());
+        values.put("Username",c.getUsername());
+        values.put("Password",c.getPassword());
+        long flag=database.insert("Customer",null,values);
+        return flag;
+    }
+    public long saveUpdateCustomer(Customer c, SQLiteDatabase database)
+    {
+        ContentValues values=new ContentValues();
+        values.put("Name",c.getName());
+        values.put("Email",c.getEmail());
+        values.put("Phone",c.getPhone());
+        values.put("Username",c.getUsername());
+        values.put("Password",c.getPassword());
+        long flag=database.update("Customer",values,"Id=?", new String[]{c.getId()+""});
+        return flag;
+    }
+    public long removeCustomer(String Id, SQLiteDatabase database)
+    {
+        int flag=database.delete("Customer","Id=?", new String[]{Id});
+        return flag;
     }
 }

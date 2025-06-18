@@ -1,16 +1,23 @@
 package com.bear.k22411csampleproject;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast; // Import Toast
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +37,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.NetworkInterface;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,10 +46,12 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox chkSaveLoginInfor;
     Button btnLogin;
     ImageView btnExit;
+    TextView txtNetworkStatus;
 
     String DATABASE_NAME="SalesDatabase.sqlite";
     private static final String DB_PATH_SUFFIX = "/databases/";
     SQLiteDatabase database=null;
+    BroadcastReceiver networkReceiver=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,41 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
         processCopy();
+        setupBroadcastReceiver();
+    }
+
+    private void setupBroadcastReceiver() {
+        networkReceiver=new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                ConnectivityManager cm = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+                if (networkInfo != null && networkInfo.isConnected()) {
+                    btnLogin.setVisibility(View.VISIBLE);
+
+                    // Check type of connection
+                    int type = networkInfo.getType();
+                    if (type == ConnectivityManager.TYPE_WIFI) {
+                        txtNetworkStatus.setText("WiFi");
+                        txtNetworkStatus.setTextColor(getResources().getColor(android.R.color.holo_blue_dark)); // WiFi: Blue
+                    } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                        txtNetworkStatus.setText("5G"); // hoặc “Mobile” nếu không chắc là 5G
+                        txtNetworkStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark)); // Mobile: Red
+                    } else {
+                        txtNetworkStatus.setText("Connected");
+                        txtNetworkStatus.setTextColor(getResources().getColor(android.R.color.black));
+                    }
+
+                } else {
+                    btnLogin.setVisibility(View.INVISIBLE);
+                    txtNetworkStatus.setText("No Connection");
+                    txtNetworkStatus.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                }
+            }
+
+        };
+
     }
 
     private void addViews() {
@@ -63,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         chkSaveLoginInfor = findViewById(R.id.chkSaveLoginInfor);
         btnLogin=findViewById(R.id.btnLogin);
         btnExit=findViewById(R.id.btnExit);
+        txtNetworkStatus = findViewById(R.id.txtNetworkStatus);
+
     }
 
     public void do_login(View view) {
@@ -126,6 +173,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         saveLoginInformation();
+        if(networkReceiver!=null)
+        {
+            unregisterReceiver(networkReceiver);
+        }
     }
     public void restoreLoginInformation()
     {
@@ -145,6 +196,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         restoreLoginInformation();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkReceiver, filter);
+
     }
     private void processCopy() {
         //private app

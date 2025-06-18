@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgOrder;
     TextView txtOrder;
 
+    ImageView imgTelephony;
+    TextView txtTelephony;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
         imgOrder.setOnClickListener(view -> openOrdersViewerActivity());
         txtOrder.setOnClickListener(view -> openOrdersViewerActivity());
+
+        imgTelephony.setOnClickListener(view -> openTelephonyActivity());
+        txtTelephony.setOnClickListener(view -> openTelephonyActivity());
+    }
+
+    private void openTelephonyActivity() {
+        Intent intent = new Intent(MainActivity.this, TelephonyActivity.class);
+        startActivity(intent);
     }
 
     private void openPaymentMethodActivity() {
@@ -116,5 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
         imgOrder = findViewById(R.id.imgOrder);
         txtOrder = findViewById(R.id.txtOrder);
+
+        imgTelephony = findViewById(R.id.imgTelephony);
+        txtTelephony = findViewById(R.id.txtTelephony);
     }
 }
